@@ -1,7 +1,6 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,7 +23,7 @@ public class SignUpForm {
     @JsonProperty("lastname")
     private String lastName;
     @NotEmpty
-    @Email(regexp = "[a-z]+@[acme]+\\.com")
+    @Email(regexp = "[a-z,0-9]+@[acme]+\\.com")
     private String email;
     @NotEmpty
     private String password;
