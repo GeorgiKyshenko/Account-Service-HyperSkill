@@ -2,7 +2,7 @@ package com.example.demo.services.Impl;
 
 import com.example.demo.exceptions.UserAlreadyExistsException;
 import com.example.demo.models.DTOs.SignUpResponse;
-import com.example.demo.models.SignUpForm;
+import com.example.demo.models.User;
 import com.example.demo.repositories.RegistrationRepository;
 import com.example.demo.services.RegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public SignUpResponse register(SignUpForm sigUp) throws UserAlreadyExistsException {
+    public SignUpResponse register(User sigUp) throws UserAlreadyExistsException {
         boolean userExists = userEmailExists(sigUp.getEmail());
         if (userExists) {
             throw new UserAlreadyExistsException();

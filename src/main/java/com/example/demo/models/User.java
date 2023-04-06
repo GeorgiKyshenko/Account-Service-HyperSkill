@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "user_registration")
-public class SignUpForm {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

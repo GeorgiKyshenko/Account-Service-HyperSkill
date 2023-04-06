@@ -2,7 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.exceptions.UserAlreadyExistsException;
 import com.example.demo.models.DTOs.SignUpResponse;
-import com.example.demo.models.SignUpForm;
+import com.example.demo.models.User;
 import com.example.demo.services.RegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponse> registration(@RequestBody @Valid SignUpForm sigUp) throws UserAlreadyExistsException {
+    public ResponseEntity<SignUpResponse> registration(@RequestBody @Valid User sigUp) throws UserAlreadyExistsException {
         SignUpResponse register = registrationService.register(sigUp);
         return ResponseEntity.ok().body(register);
     }

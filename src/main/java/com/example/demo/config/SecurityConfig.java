@@ -29,12 +29,11 @@ public class SecurityConfig {
         http.httpBasic()
                 .and()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2").permitAll()
+                        .requestMatchers("/h2/**").permitAll() //h2 should always be like this -> "/h2/**"
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                         .anyRequest().authenticated());
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.formLogin().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
