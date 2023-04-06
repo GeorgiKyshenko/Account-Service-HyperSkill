@@ -1,10 +1,12 @@
-package com.example.demo.services;
+package com.example.demo.services.Impl;
 
 import com.example.demo.exceptions.UserAlreadyExistsException;
 import com.example.demo.models.DTOs.SignUpResponse;
 import com.example.demo.models.SignUpForm;
 import com.example.demo.repositories.RegistrationRepository;
+import com.example.demo.services.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final RegistrationRepository registrationRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public SignUpResponse register(SignUpForm sigUp) throws UserAlreadyExistsException {
@@ -19,6 +22,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (userExists) {
             throw new UserAlreadyExistsException();
         } else {
+            sigUp.setPassword(passwordEncoder.encode(sigUp.getPassword()));
             registrationRepository.save(sigUp);
             return SignUpResponse.builder()
                     .name(sigUp.getName())
